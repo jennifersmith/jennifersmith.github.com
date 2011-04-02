@@ -98,15 +98,17 @@ Other interesting parts are the low level C libraries:
 From the code samples, it seems that getting started with basic programs
 is pretty easy:
 
-    var net = require('net');
-    var server = net.createServer(function (socket) {
-      socket.write("Echo server\r\n");
-      socket.setEncoding('ascii');
-      socket.on('data', function(data) {
-        socket.write(data.toUpperCase());
-      });
-    });
-    server.listen(8124, "127.0.0.1");
+{% highlight javascript %}
+var net = require("net");
+var server = net.createServer(function (socket) {
+  socket.write("Echo server\r\n");
+  socket.setEncoding("ascii");;
+  socket.on("data", function(data) {
+  socket.write(data.toUpperCase());
+  });
+});
+server.listen(8124, "127.0.0.1");
+{% endhighlight %}
 
 This listing sets up a server using the net library. When an incoming
 socket is accepted, it binds to the data receive event and simply writes
@@ -125,30 +127,40 @@ One drawback of working in an asynchronous/callback world is that it
 tends to lead to tangled, spaghetti code. If you wanted to call two
 operations in a synchrnonous way, it might look like this:
 
-    jump_to_the_left();
-    step_to_the_right();
+
+{% highlight javascript %}
+jump_to_the_left();
+step_to_the_right();
+{% endhighlight %}
 
 You can call each method procedurally in the order you desire. In
 node.js it might end up looking like this (presuming these were I/O
 operations):
 
-    jump_to_the_left(function(){
-       step_to_the_right();
-    });
+{% highlight javascript %}
+jump_to_the_left(function(){
+    step_to_the_right();
+});
+
+{% endhighlight %}
 
 Which presumably if it gets to any kind of complicated, the code would
 start to resemble:
 
-    jump_to_the_left(function(){
-       step_to_the_right(function(){
-          put_your_hands_on_your_hips(function(){
-             bring_your_knees_in_tight();
-      });
-       });
+{% highlight javascript %}
+jump_to_the_left(function(){
+   step_to_the_right(function(){
+   put_your_hands_on_your_hips(function(){
+     	bring_your_knees_in_tight();
     });
+  });
+ });
+
+{% endhighlight %}
 
 Then if you add in error handling to the mix, synchronously:
 
+{% highlight javascript %}
     try{
       jump_to_the_left();
       step_to_the_right();
@@ -157,17 +169,21 @@ Then if you add in error handling to the mix, synchronously:
        log("Failed to execute timewarp sequence");
     }
 
+{% endhighlight %}
+
 ... which wouldn't work asynchronously, as the try/catch would not be
 surrounding the point at which the handlers are executed. A convention
 has been adopted to pass in the error status as the first parameter to a
 callback, leading to:
 
-    jump_to_the_left(function(err){
-       if(err){
+{% highlight javascript %}
+jump_to_the_left(function(err){
+  if(err){
     log("Failed to jump to the left");
-       }
-       step_to_the_right();
-    });
+  }
+  step_to_the_right();
+});
+{% endhighlight %}
 
 It's not hard to see that any program above the level of 'trivial' is
 going to get very complex and unreadable.
