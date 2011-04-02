@@ -35,14 +35,19 @@ for OpenRasta?' I had the reply 'No, but why don't you write one'. Never
 one to back down from a challenge I did. And you can download it from
 [GoogleCode](http://code.google.com/p/openrastasparkcodec/) (though I
 would prefer you grab the trunk cos the latest version is probably
-already out of date!). **OpenRasta meet Spark, Spark meet OpenRasta** If
-you are not familiar with either of these projects, then this project
+already out of date!). 
+
+###OpenRasta meet Spark, Spark meet OpenRasta 
+If you are not familiar with either of these projects, then this project
 probably means nothing to you. If you get one and not the other then
-read on. **OpenRasta** 'is a Resource-Oriented framework to build
+read on. 
+
+**OpenRasta** 'is a Resource-Oriented framework to build
 MVC-style applications on asp.net 2 and above.' (I copied this from
 [here](http://www.ohloh.net/p/openrasta)). Easiest way to get into it I
 think is to either hear a talk on it, or use [this
 tutorial](http://svn.caffeine-it.com/openrasta/trunk/doc/content/Tutorials/Create-First-Site.html).
+
 The **Spark View Engine** is written for ASP.NET MVC and provides a
 slightly alternative syntax for specifying views. Basically it uses an
 extended set of attributes and tags on top of plain old HTML to let you
@@ -61,8 +66,10 @@ do crazy things like:
 Simple, readable and pretty cool I think, when your alternative is a big
 old mess of tagsoup. Out of all the alternatives, it is definitely the
 clearest and most logical I have seen so far. Any
-web-designers/front-end devs out there want to tell me if they agree?
-**Using the Codec from OpenRasta** In a later post I might choose to
+web-designers/front-end devs out there want to tell me if they agree? 
+
+### Using the Codec from OpenRasta
+In a later post I might choose to
 talk about my design approach, but when it came to OpenRasta, this
 approach was very much 'Copy what the webforms codec does'. So to use
 the spark view engine, you start by adding this to the top of your
@@ -91,7 +98,8 @@ folder views/. There you are - you are all ready to start getting Sparky
 with your OpenRasta. Note that OpenRasta allows you to mix and match
 your codecs - so you can just have one or two views rendered using Spark
 if that is what you want. 
-**Extensions to the Spark syntax** 
+
+###Extensions to the Spark syntax 
 One of the
 things I liked about OpenRasta was some of the markup extensions that it
 contains. I.e. you can do something like:
@@ -138,7 +146,7 @@ is far from complete - it works enough to just about power the demo
 application that I packaged with the codec source so I suggest you take
 a look at this for more pointers. 
 
-**Futures**
+###Futures
 
  This started as a small
 pet project but if you want to give me a hand please please do catch up
