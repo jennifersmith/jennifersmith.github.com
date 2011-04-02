@@ -4,8 +4,12 @@ title: Jen's Blog
 ---
 
 {% for post in site.posts limit:5 %}
-<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-{{ post.content }}
-<em>Posted on {{ post.date | date_to_long_string }}.</em>
+<div class="entry">
+	<h2 id="{{ post.slug }}"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+	<p class="date">{{ post.date | date_to_long_string }}</p>
+	<div class="entry-content">
+		{{ post.content }}
+	</div>
+</div>
 {% endfor %}
 

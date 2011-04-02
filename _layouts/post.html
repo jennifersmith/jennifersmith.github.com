@@ -1,12 +1,38 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
 		<title>{{ page.title }}</title>
+		{% include styles.html %}
 	</head>
 
 	<body>
-		<h1>{{ page.title }}</h1>
 
-		{{ content }}
+	<div id="header" class="container_12">
+
+<div id="" class="grid_12 ">
+		<h1>{{ page.title }}</h1>
+	 <p class="date">{{ page.date | date_to_long_string }}</p>
+
+</div>
+</div>
+
+		<div id="content" class="container_12">
+
+		{% include navigation.html %}
+
+			<div id="main-content" class="grid_10 ">
+				{{ content }}
+			</div>
+
+		{% include postmeta.html %}
+
+		</div>
+		<div id="footer" class="container_12">
+			<p class="grid_12 ">
+			</p>
+		</div>
+
+
 	</body>
 </html>
+

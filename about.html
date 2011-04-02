@@ -1,11 +1,13 @@
 ---
 layout: default
 title: Jen's Blog
+is_page: true
 ---
-
-{% for post in site.posts limit:5 %}
-<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-{{ post.content }}
-<em>Posted on {{ post.date | date_to_long_string }}.</em>
-{% endfor %}
+	<ul>
+		<li>My name is Jennifer Smith</li>
+		<li>I live in the fair city of London</li>
+		<li>I work as a Software Developer at <a href="http://www.thoughtworks.com"> ThoughtWorks</a></li>
+		<li>I am a person</li>
+	</ul>
+	<p>I think that’s enough …</p>
 
