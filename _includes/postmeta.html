@@ -1,0 +1,7 @@
+<div class="item_meta">
+    <div class="item_tags">Tagged with: 
+      {% for topic in page.tags %}
+      {{ topic }}{% if forloop.last != true %}, {% endif %}
+      {% endfor %}
+    </div>
+ </div>
