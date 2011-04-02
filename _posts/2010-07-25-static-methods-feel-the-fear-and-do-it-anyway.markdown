@@ -5,16 +5,20 @@ layout: post
 slug: static-methods-feel-the-fear-and-do-it-anyway
 status: publish
 title: 'Static methods: feel the fear and do it anyway'
-wordpress_id: '184'
 categories:
 - Software Development
+tags:
+- design
+- c#
+- refactoring
 ---
 
 When your tests go green, it's often a good idea to think about tidying
 up the internals of the method you just added/changed. One of my
 favourite things to do here is to extract out meaningful methods from
 the implementation e.g
-~~~~ {lang="csharp"}
+
+{% highlight csharp %}
 if(toolkit.Contains(Tools.Hammer))
 {
     var hammer = toolkit[x.Tool.Hammer];
@@ -22,17 +26,18 @@ if(toolkit.Contains(Tools.Hammer))
     Day.Evening.Do(hammer.Execute);
     ThisLand.AllOver.Do(hammer.Execute);
 }
-~~~~
+{% endhighlight %}
 
 ... At the click of an alt-shift-m becomes :
-~~~~ {lang="csharp"}
+i
+{% highlight csharp %}
 if(IHadAHammer())
 {
     IdHammerInThe(Day.Morning);
     IdHammerInThe(Day.Evening);
     AllOverThisLand(); // OK I took that one a bit too far.
 }
-~~~~
+{% endhighlight %}
 
 Very often, extracting methods will leave you with a helpful suggestion
 from our friend resharper: "This method could be made static". I have
@@ -51,29 +56,29 @@ where should it go? This is where the 'do it anyway' part comes in. Go
 make the method static. If there are several similar methods (and there
 usually are), go make all of them static and then look for patterns:
 -   A set of functions that take in a type you control:
-~~~~ {lang="csharp"}
+{% highlight csharp %}
    public bool static HasExpiredPassword(User user) {...}
    public bool static HasPermissionToEditResource(User user, Resource resource) {...}
-~~~~
+{% endhighlight %}
 
     Perhaps this reasoning could be part of the User class as instance
     methods.
 -   Methods which take in a system type as the first parameter, all with
     the same/similar name, for example:
-~~~~ {lang="csharp"}
+{% highlight csharp %}
 public static  bool IsValidEmailAddress(string emailAddress){...}
 public static string GetEmailHostName(string emailAddress )
-~~~~
+{% endhighlight %}
 
     Maybe email address warrants a class of it's own containing these
     methods. The EmailAddress class could end up being a magnet for many
     other similar methods dotted around other classes too.
 -   Either of the above but taking in a collection/IEnumerable of the
     same, e.g. :
-~~~~ {lang="csharp"}
+{% highlight csharp %}
 static MailAddressCollection BuildSenderList(IEnumerable emailAddresses)
 static IEnumerable GetAllUsersInGroup(IEnumerable users, Group group)
-~~~~
+{% endhighlight %}
 
     Here, extension methods are your friend for a quick fix (ReSharper
     can totally help you out here). Chances are that if 'User' is part
