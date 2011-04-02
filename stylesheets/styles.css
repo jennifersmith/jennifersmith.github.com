@@ -1,10 +1,11 @@
-body {font-family: helvetica, arial}
+body {font-family: helvetica, arial; font-size:0.8em}
 #header div { border-bottom: 1px #0054A0 solid}
 #header h1 {color:#3A75C4; font-weight:bold; font-size:xx-large}
 #navigation {margin-top:20px}
 #navigation ul {list-style:none; margin:0; padding:0}
 #navigation li {margin:0; padding:0}
-#navigation .menu {border: 1px #6689CC solid; box-shadow: 3px 3px 3px #888;}
+#navigation .menu {margin-bottom: 20px; border: 1px #6689CC solid; box-shadow: 3px 3px 3px #888;}
 #navigation .menu h2 {font-size:1em;margin:0; padding:0; background-color:#6689CC; text-align:center; color:#fff }
-#navigation .menu a { text-decoration: none; padding:10px;color:#6689CC;}
+#navigation .menu li a {padding:10px;}
+#navigation a { text-decoration: none; color:#6689CC;}
 .entry h2 a {color:#3A75C4; text-decoration:none}
