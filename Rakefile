@@ -1,7 +1,10 @@
 require "rubygems"
 require "bundler"
-Bundler.setup
+require 's3'
+require 'digest/md5'
+require 'mime/types'
 
+Bundler.setup
 require 'source/_helpers'
 
 site_url    = "http://yoursite.com"   # deployed site url for sitemap.xml generator
@@ -217,5 +220,61 @@ task :sitemap do
     end
     sitemap.puts %Q{</urlset>}
     puts "Created #{site}/sitemap.xml"
+  end
+end
+
+namespace :assets do  
+  desc "Deploy all assets in public/**/* to S3/Cloudfront"
+  task :deploy, :env, :branch do |t, args|
+
+		credentials = YAML::load( File.open( 'aws' ) )
+		## Use the `s3` gem to connect my bucket
+    puts "== Uploading assets to S3/Cloudfront"
+
+    service = S3::Service.new(
+      :access_key_id => credentials["AWS_ACCESS_KEY_ID"],
+      :secret_access_key => credentials["AWS_SECRET_ACCESS_KEY"])
+    bucket = service.buckets.find(credentials["AWS_BUCKET"])
+
+## Needed to show progress
+    STDOUT.sync = true
+
+## Find all files (recursively) in ./public and process them.
+    Dir.glob("site/**/*").each do |file|
+
+## Only upload files, we're not interested in directories
+      if File.file?(file)
+
+## Slash 'public/' from the filename for use on S3
+        remote_file = file.gsub("site/", "")
+
+## Try to find the remote_file, an error is thrown when no
+## such file can be found, that's okay.  
+        begin
+          obj = bucket.objects.find_first(remote_file)
+        rescue
+          obj = nil
+        end
+
+## If the object does not exist, or if the MD5 Hash / etag of the 
+## file has changed, upload it.
+        if !obj || (obj.etag != Digest::MD5.hexdigest(File.read(file)))
+            print "U"
+
+## Simply create a new object, write the content and set the proper 
+## mime-type. `obj.save` will upload and store the file to S3.
+            obj = bucket.objects.build(remote_file)
+            obj.content = open(file)
+            obj.content_type = MIME::Types.type_for(file).to_s
+            obj.save
+        else
+          print "."
+        end
+      end
+    end
+    STDOUT.sync = false # Done with progress output.
+
+    puts
+    puts "== Done syncing assets"
   end
 end

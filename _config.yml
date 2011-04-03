@@ -3,7 +3,7 @@ destination: site
 markdown: rdiscount
 pygments: true
 permalink: /blog/:year/:month/:day/:title
-url: http://yoursite.com
+url: http://jennifersmith.s3-website-us-east-1.amazonaws.com/
 multiviews: true
 sass: false
 haml: true

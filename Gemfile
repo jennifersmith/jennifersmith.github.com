@@ -10,3 +10,7 @@ gem 'fssm'
 gem 'serve'
 gem 'mongrel'
 gem 'rake'
+gem 's3'
+gem 'mime-types'
+gem 'aws'
+
