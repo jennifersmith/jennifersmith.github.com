@@ -1,5 +1,7 @@
-task :default => "site:generate"
+require 'jasmine'
+load 'jasmine/tasks/jasmine.rake'
 
+task :default => "site:generate"
 namespace :site do
 	task :generate do
 		sh "jekyll --pygments"
