@@ -1,15 +1,13 @@
 require "rubygems"
 require "bundler"
-require 's3'
 require 'digest/md5'
-require 'mime/types'
 
 Bundler.setup
 require 'source/_helpers'
 
-site_url    = "http://yoursite.com"   # deployed site url for sitemap.xml generator
+site_url    = "http://jennifersmith.co.uk"   # deployed site url for sitemap.xml generator
 port        = "4000"      # preview project port eg. http://localhost:4000
-site        = "site"      # compiled site directory
+site        = "site/public"      # compiled site directory
 source      = "source"    # source file directory
 stash       = "_stash"    # directory to stash posts for speedy generation
 posts       = "_posts"    # directory for blog files
