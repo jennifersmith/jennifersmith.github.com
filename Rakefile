@@ -35,7 +35,7 @@ end
 
 ## if you're deploying with github, change the default deploy to deploy_github
 desc "default deploy task"
-task :deploy => [:deploy_rsync] do
+task :deploy => [:deploy_heroku] do
 end
 
 desc "Generate and deploy task"
@@ -168,6 +168,26 @@ multitask :deploy_github do
   puts "\n>>> Github Pages deploy complete <<<\n"
   repo.branch("#{source_branch}").checkout
 end
+
+multitask :deploy_heroku do
+  puts ">>> Deploying #{deploy_branch} branch to heroku<<<"
+  require 'git'
+	sh "cd site"
+  repo = Git.open('site')
+  puts "\n>>> Checking out #{deploy_branch} branch <<<\n"
+  repo.branch("#{deploy_branch}").checkout
+  puts "\n>>> Moving generated site files <<<\n"
+  Dir["site/**/*"].each {|f| repo.add(f.gsub("site/", "")) }
+  repo.status.deleted.each {|f, s| repo.remove(f)}
+  puts "\n>>> Commiting: Site updated at #{Time.now.utc} <<<\n"
+  message = ENV["MESSAGE"] || "Site updated at #{Time.now.utc}"
+  repo.commit(message)
+  puts "\n>>> Pushing generated site to #{deploy_branch} branch <<<\n"
+  repo.push git.remote("heroku")
+  puts "\n>>> Github Pages deploy complete <<<\n"
+  repo.branch("#{source_branch}").checkout
+end
+
 
 desc "start up an instance of serve on the output files"
 task :start_serve => :stop_serve do

@@ -22,6 +22,7 @@ GEM
     fastthread (1.0.7)
     fssm (0.2.6.1)
     gem_plugin (0.2.3)
+    git (1.2.5)
     haml (3.0.25)
     henrik-jekyll (0.5.2)
       RedCloth (>= 4.0.4)
@@ -67,6 +68,7 @@ DEPENDENCIES
   compass
   compass-colors
   fssm
+  git
   henrik-jekyll
   mime-types
   mongrel

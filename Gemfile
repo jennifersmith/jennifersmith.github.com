@@ -1,6 +1,8 @@
 source "http://rubygems.org"
 source "http://gems.github.com"
 
+
+gem 'git'
 gem 'activesupport', "2.3.5"
 gem 'henrik-jekyll'
 gem 'compass'
