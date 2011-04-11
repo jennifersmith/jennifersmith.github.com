@@ -50,7 +50,11 @@ GEM
     serve (0.11.7)
       activesupport (>= 2.3.5)
       rack (>= 1.2.1)
+    sinatra (1.2.2)
+      rack (~> 1.1)
+      tilt (>= 1.2.2, < 2.0)
     syntax (1.0.0)
+    tilt (1.2.2)
     uuidtools (2.1.2)
     xml-simple (1.0.15)
 
@@ -70,3 +74,4 @@ DEPENDENCIES
   rdiscount
   s3
   serve
+  sinatra

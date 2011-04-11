@@ -7,7 +7,7 @@ require 'source/_helpers'
 
 site_url    = "http://jennifersmith.co.uk"   # deployed site url for sitemap.xml generator
 port        = "4000"      # preview project port eg. http://localhost:4000
-site        = "site/public"      # compiled site directory
+ site       = "site/public"      # compiled site directory
 source      = "source"    # source file directory
 stash       = "_stash"    # directory to stash posts for speedy generation
 posts       = "_posts"    # directory for blog files
@@ -43,7 +43,7 @@ task :generate_deploy => [:integrate, :generate, :clean_debug, :deploy] do
 end
 
 desc "generate website in output directory"
-task :generate => [:generate_site, :generate_style] do
+task :generate => [:generate_site, :generate_style, :generate_heroku] do
   puts ">>> Site Generating Complete! <<<\n\n>>> Refresh your browser <<<"
 end
 
@@ -101,6 +101,13 @@ task :generate_site => [:clean, :generate_style] do
   puts "\n\n>>> Generating site files <<<"
   system "jekyll --pygments"
   system "mv #{site}/atom.html #{site}/atom.xml"
+end
+
+desc "Generate heroku files"
+task :generate_heroku => [:clean, :generate_site] do
+	puts "\n\n>>> Copying in stuff for heroku <<<\n\n"
+	system "cp  heroku/* site"
+	system "mv site/gems .gems"
 end
 
 def rebuild_site(relative)
