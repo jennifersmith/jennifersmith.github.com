@@ -179,11 +179,15 @@ multitask :deploy_heroku do
   puts "\n>>> Moving generated site files <<<\n"
   Dir["site/**/*"].each {|f| repo.add(f.gsub("site/", "")) }
   repo.status.deleted.each {|f, s| repo.remove(f)}
-  puts "\n>>> Commiting: Site updated at #{Time.now.utc} <<<\n"
-  message = ENV["MESSAGE"] || "Site updated at #{Time.now.utc}"
-  repo.commit(message)
-  puts "\n>>> Pushing generated site to #{deploy_branch} branch <<<\n"
-  repo.push git.remote("heroku")
+  if(repo.status.changed.empty?) 
+		puts "\n>>> Nothing to commit!<<<\n"
+	else
+		puts "\n>>> Commiting: Site updated at #{Time.now.utc} <<<\n"
+  	message = ENV["MESSAGE"] || "Site updated at #{Time.now.utc}"
+  	repo.commit(message)
+	end
+	puts "\n>>> Pushing generated site to #{deploy_branch} branch <<<\n"
+  repo.push repo.remote("heroku")
   puts "\n>>> Github Pages deploy complete <<<\n"
   repo.branch("#{source_branch}").checkout
 end
