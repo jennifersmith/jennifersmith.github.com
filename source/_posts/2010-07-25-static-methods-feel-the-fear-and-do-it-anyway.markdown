@@ -1,7 +1,5 @@
 ---
 author: admin
-date: '2010-07-25 10:30:33'
-layout: post
 slug: static-methods-feel-the-fear-and-do-it-anyway
 status: publish
 title: 'Static methods: feel the fear and do it anyway'

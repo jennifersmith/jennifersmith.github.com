@@ -1,7 +1,5 @@
 ---
 author: admin
-date: '2009-04-24 07:03:37'
-layout: post
 slug: extension-method-assertions-versus-standard-assertions
 status: publish
 title: Extension method assertions versus standard assertions

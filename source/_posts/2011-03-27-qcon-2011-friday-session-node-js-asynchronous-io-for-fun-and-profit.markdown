@@ -1,7 +1,5 @@
 ---
 author: admin
-date: '2011-03-27 07:32:27'
-layout: post
 slug: qcon-2011-friday-session-node-js-asynchronous-io-for-fun-and-profit
 status: publish
 title: ' QCon 2011 - Friday session - Node.js: Asynchronous I/O for Fun and Profit'

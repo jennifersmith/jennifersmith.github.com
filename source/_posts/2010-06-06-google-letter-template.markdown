@@ -1,7 +1,5 @@
 ---
 author: admin
-date: '2010-06-06 09:29:22'
-layout: post
 slug: google-letter-template
 status: publish
 title: Google letter template

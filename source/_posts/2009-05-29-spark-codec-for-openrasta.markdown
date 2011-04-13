@@ -1,7 +1,5 @@
 ---
 author: admin
-date: '2009-05-29 09:10:29'
-layout: post
 slug: spark-codec-for-openrasta
 status: publish
 title: Spark codec for OpenRasta
